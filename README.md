@@ -1,7 +1,9 @@
 # Roblox Studio Black Box Template
 
-Displays a centered, black `300 × 180` UI box for each player. Players can
-click/touch and drag the box.
+Displays a centered, black `620 × 460` draggable panel for each player. It
+contains grey list entries for Italian-brainrot-themed server names and green
+Join buttons. The buttons currently log the selected name to Output; connect
+them to your own approved game matchmaking flow as needed.
 
 ## Install
 
