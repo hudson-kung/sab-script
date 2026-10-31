@@ -1,6 +1,7 @@
 # Roblox Studio Black Box Template
 
-Displays a centered, black `300 × 180` UI box for each player.
+Displays a centered, black `300 × 180` UI box for each player. Players can
+click/touch and drag the box.
 
 ## Install
 
