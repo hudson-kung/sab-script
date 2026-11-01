@@ -42,9 +42,13 @@ outline.Parent = box
 local titleBar = Instance.new("Frame")
 titleBar.Name = "TitleBar"
 titleBar.Size = UDim2.new(1, 0, 0, 56)
-titleBar.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
+titleBar.BackgroundColor3 = Color3.fromRGB(235, 120, 0)
 titleBar.BorderSizePixel = 0
 titleBar.Parent = box
+
+local titleBarCorner = Instance.new("UICorner")
+titleBarCorner.CornerRadius = UDim.new(0, 12)
+titleBarCorner.Parent = titleBar
 
 local title = Instance.new("TextLabel")
 title.Name = "Title"
