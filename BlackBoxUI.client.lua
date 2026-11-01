@@ -103,19 +103,19 @@ layout.Padding = UDim.new(0, 10)
 layout.SortOrder = Enum.SortOrder.LayoutOrder
 layout.Parent = list
 
-local names = {
-	"Tralalero Tralala",
-	"Bombardiro Crocodilo",
-	"Ballerina Cappuccina",
-	"Chimpanzini Bananini",
-	"Lirili Larila",
-	"Tung Tung Tung Sahur",
+local brainrots = {
+	{ name = "Tralalero Tralala", rate = "15.2M/s money" },
+	{ name = "Bombardiro Crocodilo", rate = "38.6M/s money" },
+	{ name = "Ballerina Cappuccina", rate = "124.0M/s money" },
+	{ name = "Chimpanzini Bananini", rate = "760.5M/s money" },
+	{ name = "Lirili Larila", rate = "1.4B/s money" },
+	{ name = "Tung Tung Tung Sahur", rate = "3.2B/s money" },
 }
 
-for index, name in ipairs(names) do
+for index, brainrot in ipairs(brainrots) do
 	local entry = Instance.new("Frame")
 	entry.Name = "Entry" .. index
-	entry.Size = UDim2.new(1, -8, 0, 54)
+	entry.Size = UDim2.new(1, -8, 0, 64)
 	entry.BackgroundColor3 = Color3.fromRGB(75, 75, 75)
 	entry.BorderSizePixel = 0
 	entry.LayoutOrder = index
@@ -124,14 +124,26 @@ for index, name in ipairs(names) do
 	local entryName = Instance.new("TextLabel")
 	entryName.Name = "Name"
 	entryName.BackgroundTransparency = 1
-	entryName.Position = UDim2.fromOffset(14, 0)
-	entryName.Size = UDim2.new(1, -130, 1, 0)
+	entryName.Position = UDim2.fromOffset(14, 5)
+	entryName.Size = UDim2.new(1, -130, 0, 28)
 	entryName.Font = Enum.Font.GothamMedium
-	entryName.Text = name
+	entryName.Text = brainrot.name
 	entryName.TextColor3 = Color3.fromRGB(255, 255, 255)
 	entryName.TextSize = 18
 	entryName.TextXAlignment = Enum.TextXAlignment.Left
 	entryName.Parent = entry
+
+	local rate = Instance.new("TextLabel")
+	rate.Name = "MoneyRate"
+	rate.BackgroundTransparency = 1
+	rate.Position = UDim2.fromOffset(14, 31)
+	rate.Size = UDim2.new(1, -130, 0, 24)
+	rate.Font = Enum.Font.Gotham
+	rate.Text = brainrot.rate
+	rate.TextColor3 = Color3.fromRGB(195, 195, 195)
+	rate.TextSize = 14
+	rate.TextXAlignment = Enum.TextXAlignment.Left
+	rate.Parent = entry
 
 	local joinButton = Instance.new("TextButton")
 	joinButton.Name = "JoinButton"
@@ -147,7 +159,7 @@ for index, name in ipairs(names) do
 	joinButton.Parent = entry
 
 	joinButton.Activated:Connect(function()
-		print("Join selected for " .. name)
+		print("Join selected for " .. brainrot.name)
 	end)
 end
 
