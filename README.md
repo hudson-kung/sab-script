@@ -5,6 +5,9 @@ contains grey list entries for Italian-brainrot-themed server names and green
 Join buttons. The buttons currently log the selected name to Output; connect
 them to your own approved game matchmaking flow as needed.
 
+Use the `−` button to collapse the panel to its top bar; press `+` to restore
+it. The `×` button closes the UI for the current player.
+
 ## Install
 
 1. Open your experience in Roblox Studio.
