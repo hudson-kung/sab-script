@@ -5,6 +5,9 @@ contains grey list entries for Italian-brainrot-themed server names and green
 Join buttons. The buttons currently log the selected name to Output; connect
 them to your own approved game matchmaking flow as needed.
 
+Entries are ordered from the largest rate to the smallest. The filter buttons
+show the `100M+` and `1B+` lists; `OG` deliberately displays an empty section.
+
 Use the `−` button to collapse the panel to its top bar; press `+` to restore
 it. The `×` button closes the UI for the current player.
 

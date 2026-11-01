@@ -77,8 +77,8 @@ local list = Instance.new("ScrollingFrame")
 list.Name = "ServerList"
 list.BackgroundTransparency = 1
 list.BorderSizePixel = 0
-list.Position = UDim2.fromOffset(20, 60)
-list.Size = UDim2.new(1, -40, 1, -80)
+list.Position = UDim2.fromOffset(20, 112)
+list.Size = UDim2.new(1, -40, 1, -132)
 list.AutomaticCanvasSize = Enum.AutomaticSize.Y
 list.CanvasSize = UDim2.new()
 list.ScrollBarThickness = 6
@@ -103,14 +103,29 @@ layout.Padding = UDim.new(0, 10)
 layout.SortOrder = Enum.SortOrder.LayoutOrder
 layout.Parent = list
 
+local filterBar = Instance.new("Frame")
+filterBar.Name = "FilterBar"
+filterBar.BackgroundTransparency = 1
+filterBar.Position = UDim2.fromOffset(20, 66)
+filterBar.Size = UDim2.new(1, -40, 0, 36)
+filterBar.Parent = box
+
+local filterLayout = Instance.new("UIListLayout")
+filterLayout.FillDirection = Enum.FillDirection.Horizontal
+filterLayout.Padding = UDim.new(0, 10)
+filterLayout.SortOrder = Enum.SortOrder.LayoutOrder
+filterLayout.Parent = filterBar
+
 local brainrots = {
-	{ name = "Tralalero Tralala", rate = "15.2M/s money" },
-	{ name = "Bombardiro Crocodilo", rate = "38.6M/s money" },
-	{ name = "Ballerina Cappuccina", rate = "124.0M/s money" },
-	{ name = "Chimpanzini Bananini", rate = "760.5M/s money" },
-	{ name = "Lirili Larila", rate = "1.4B/s money" },
-	{ name = "Tung Tung Tung Sahur", rate = "3.2B/s money" },
+	{ name = "Tung Tung Tung Sahur", rate = "3.2B/s", value = 3200 },
+	{ name = "Lirili Larila", rate = "1.4B/s", value = 1400 },
+	{ name = "Chimpanzini Bananini", rate = "760.5M/s", value = 760.5 },
+	{ name = "Ballerina Cappuccina", rate = "124.0M/s", value = 124 },
+	{ name = "Bombardiro Crocodilo", rate = "38.6M/s", value = 38.6 },
+	{ name = "Tralalero Tralala", rate = "15.2M/s", value = 15.2 },
 }
+
+local entries = {}
 
 for index, brainrot in ipairs(brainrots) do
 	local entry = Instance.new("Frame")
@@ -161,7 +176,61 @@ for index, brainrot in ipairs(brainrots) do
 	joinButton.Activated:Connect(function()
 		print("Join selected for " .. brainrot.name)
 	end)
+
+	table.insert(entries, { frame = entry, value = brainrot.value })
 end
+
+local emptyMessage = Instance.new("TextLabel")
+emptyMessage.Name = "EmptyMessage"
+emptyMessage.BackgroundTransparency = 1
+emptyMessage.Size = UDim2.new(1, -8, 0, 54)
+emptyMessage.Font = Enum.Font.GothamMedium
+emptyMessage.Text = "No OG brainrots available."
+emptyMessage.TextColor3 = Color3.fromRGB(195, 195, 195)
+emptyMessage.TextSize = 16
+emptyMessage.Visible = false
+emptyMessage.Parent = list
+
+local filterButtons = {}
+
+local function setFilter(minimumValue, showEmpty)
+	for _, entryData in ipairs(entries) do
+		entryData.frame.Visible = minimumValue == nil or entryData.value >= minimumValue
+	end
+
+	emptyMessage.Visible = showEmpty
+	list.CanvasPosition = Vector2.new(0, 0)
+end
+
+local function createFilterButton(text, minimumValue, showEmpty)
+	local filterButton = Instance.new("TextButton")
+	filterButton.Name = text .. "Button"
+	filterButton.Size = UDim2.fromOffset(186, 36)
+	filterButton.BackgroundColor3 = Color3.fromRGB(75, 75, 75)
+	filterButton.BorderSizePixel = 0
+	filterButton.Font = Enum.Font.GothamBold
+	filterButton.Text = text
+	filterButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+	filterButton.TextSize = 15
+	filterButton.Parent = filterBar
+
+	filterButton.Activated:Connect(function()
+		setFilter(minimumValue, showEmpty)
+		for _, button in ipairs(filterButtons) do
+			button.BackgroundColor3 = Color3.fromRGB(75, 75, 75)
+		end
+		filterButton.BackgroundColor3 = Color3.fromRGB(42, 180, 72)
+	end)
+
+	table.insert(filterButtons, filterButton)
+	return filterButton
+end
+
+local hundredMillionButton = createFilterButton("100M+", 100, false)
+createFilterButton("1B+", 1000, false)
+createFilterButton("OG", nil, true)
+hundredMillionButton.BackgroundColor3 = Color3.fromRGB(42, 180, 72)
+setFilter(100, false)
 
 local dragging = false
 local dragStart
