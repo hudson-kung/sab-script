@@ -117,12 +117,15 @@ filterLayout.SortOrder = Enum.SortOrder.LayoutOrder
 filterLayout.Parent = filterBar
 
 local brainrots = {
-	{ name = "Tung Tung Tung Sahur", rate = "3.2B/s", value = 3200 },
-	{ name = "Lirili Larila", rate = "1.4B/s", value = 1400 },
-	{ name = "Chimpanzini Bananini", rate = "760.5M/s", value = 760.5 },
-	{ name = "Ballerina Cappuccina", rate = "124.0M/s", value = 124 },
-	{ name = "Bombardiro Crocodilo", rate = "38.6M/s", value = 38.6 },
-	{ name = "Tralalero Tralala", rate = "15.2M/s", value = 15.2 },
+	{ name = "Dragon Cannelloni", rate = "1.7B/s", value = 1700 },
+	{ name = "Elephant", rate = "1.5B/s", value = 1500 },
+	{ name = "Dragon Cannelloni II", rate = "1.2B/s", value = 1200 },
+	{ name = "Dragon Cannelloni III", rate = "800M/s", value = 800 },
+	{ name = "Strawberry Elephant", rate = "750M/s", value = 750 },
+	{ name = "Headless Horseman", rate = "600M/s", value = 600, og = true },
+	{ name = "Dragon Cannelloni IV", rate = "500M/s", value = 500 },
+	{ name = "Skibidi Toilet", rate = "450M/s", value = 450, og = true },
+	{ name = "Dragon Cannelloni V", rate = "250M/s", value = 250 },
 }
 
 local entries = {}
@@ -177,7 +180,7 @@ for index, brainrot in ipairs(brainrots) do
 		print("Join selected for " .. brainrot.name)
 	end)
 
-	table.insert(entries, { frame = entry, value = brainrot.value })
+	table.insert(entries, { frame = entry, value = brainrot.value, og = brainrot.og })
 end
 
 local emptyMessage = Instance.new("TextLabel")
@@ -185,7 +188,7 @@ emptyMessage.Name = "EmptyMessage"
 emptyMessage.BackgroundTransparency = 1
 emptyMessage.Size = UDim2.new(1, -8, 0, 54)
 emptyMessage.Font = Enum.Font.GothamMedium
-emptyMessage.Text = "No OG brainrots available."
+emptyMessage.Text = "No entries available."
 emptyMessage.TextColor3 = Color3.fromRGB(195, 195, 195)
 emptyMessage.TextSize = 16
 emptyMessage.Visible = false
@@ -193,16 +196,22 @@ emptyMessage.Parent = list
 
 local filterButtons = {}
 
-local function setFilter(minimumValue, showEmpty)
+local function setFilter(minimumValue, ogOnly)
+	local visibleCount = 0
+
 	for _, entryData in ipairs(entries) do
-		entryData.frame.Visible = minimumValue == nil or entryData.value >= minimumValue
+		local shouldShow = if ogOnly then entryData.og else minimumValue == nil or entryData.value >= minimumValue
+		entryData.frame.Visible = shouldShow
+		if shouldShow then
+			visibleCount += 1
+		end
 	end
 
-	emptyMessage.Visible = showEmpty
+	emptyMessage.Visible = visibleCount == 0
 	list.CanvasPosition = Vector2.new(0, 0)
 end
 
-local function createFilterButton(text, minimumValue, showEmpty)
+local function createFilterButton(text, minimumValue, ogOnly)
 	local filterButton = Instance.new("TextButton")
 	filterButton.Name = text .. "Button"
 	filterButton.Size = UDim2.fromOffset(186, 36)
@@ -215,7 +224,7 @@ local function createFilterButton(text, minimumValue, showEmpty)
 	filterButton.Parent = filterBar
 
 	filterButton.Activated:Connect(function()
-		setFilter(minimumValue, showEmpty)
+		setFilter(minimumValue, ogOnly)
 		for _, button in ipairs(filterButtons) do
 			button.BackgroundColor3 = Color3.fromRGB(75, 75, 75)
 		end
