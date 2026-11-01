@@ -119,13 +119,13 @@ filterLayout.Parent = filterBar
 local brainrots = {
 	{ name = "Dragon Cannelloni", rate = "1.7B/s", value = 1700 },
 	{ name = "Elephant", rate = "1.5B/s", value = 1500 },
-	{ name = "Dragon Cannelloni II", rate = "1.2B/s", value = 1200 },
-	{ name = "Dragon Cannelloni III", rate = "800M/s", value = 800 },
+	{ name = "Dragon Cannelloni", rate = "1.2B/s", value = 1200 },
+	{ name = "Dragon Cannelloni", rate = "800M/s", value = 800 },
 	{ name = "Strawberry Elephant", rate = "750M/s", value = 750 },
 	{ name = "Headless Horseman", rate = "600M/s", value = 600, og = true },
-	{ name = "Dragon Cannelloni IV", rate = "500M/s", value = 500 },
+	{ name = "Dragon Cannelloni", rate = "500M/s", value = 500 },
 	{ name = "Skibidi Toilet", rate = "450M/s", value = 450, og = true },
-	{ name = "Dragon Cannelloni V", rate = "250M/s", value = 250 },
+	{ name = "Dragon Cannelloni", rate = "250M/s", value = 250 },
 }
 
 local entries = {}
