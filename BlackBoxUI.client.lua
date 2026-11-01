@@ -117,15 +117,15 @@ filterLayout.SortOrder = Enum.SortOrder.LayoutOrder
 filterLayout.Parent = filterBar
 
 local brainrots = {
-	{ name = "Dragon Cannelloni", rate = "1.7B/s", value = 1700 },
+	{ name = "Dragon Cannelloni", rate = "1.7B/s", value = 1700, category = "dragon" },
 	{ name = "Strawberry Elephant", rate = "1.5B/s", value = 1500 },
-	{ name = "Dragon Cannelloni", rate = "1.2B/s", value = 1200 },
-	{ name = "Dragon Cannelloni", rate = "800M/s", value = 800 },
+	{ name = "Dragon Cannelloni", rate = "1.2B/s", value = 1200, category = "dragon" },
+	{ name = "Dragon Cannelloni", rate = "800M/s", value = 800, category = "dragon" },
 	{ name = "Strawberry Elephant", rate = "750M/s", value = 750 },
 	{ name = "Headless Horseman", rate = "600M/s", value = 600, og = true },
-	{ name = "Dragon Cannelloni", rate = "500M/s", value = 500 },
+	{ name = "Dragon Cannelloni", rate = "500M/s", value = 500, category = "dragon" },
 	{ name = "Skibidi Toilet", rate = "450M/s", value = 450, og = true },
-	{ name = "Dragon Cannelloni", rate = "250M/s", value = 250 },
+	{ name = "Dragon Cannelloni", rate = "250M/s", value = 250, category = "dragon" },
 }
 
 local entries = {}
@@ -180,7 +180,12 @@ for index, brainrot in ipairs(brainrots) do
 		print("Join selected for " .. brainrot.name)
 	end)
 
-	table.insert(entries, { frame = entry, value = brainrot.value, og = brainrot.og })
+	table.insert(entries, {
+		frame = entry,
+		value = brainrot.value,
+		category = brainrot.category,
+		og = brainrot.og,
+	})
 end
 
 local emptyMessage = Instance.new("TextLabel")
@@ -196,11 +201,11 @@ emptyMessage.Parent = list
 
 local filterButtons = {}
 
-local function setFilter(minimumValue, ogOnly)
+local function setFilter(filterType)
 	local visibleCount = 0
 
 	for _, entryData in ipairs(entries) do
-		local shouldShow = if ogOnly then entryData.og else minimumValue == nil or entryData.value >= minimumValue
+		local shouldShow = if filterType == "og" then entryData.og == true else entryData.category == filterType
 		entryData.frame.Visible = shouldShow
 		if shouldShow then
 			visibleCount += 1
@@ -211,10 +216,10 @@ local function setFilter(minimumValue, ogOnly)
 	list.CanvasPosition = Vector2.new(0, 0)
 end
 
-local function createFilterButton(text, minimumValue, ogOnly)
+local function createFilterButton(text, filterType)
 	local filterButton = Instance.new("TextButton")
 	filterButton.Name = text .. "Button"
-	filterButton.Size = UDim2.fromOffset(186, 36)
+	filterButton.Size = UDim2.fromOffset(285, 36)
 	filterButton.BackgroundColor3 = Color3.fromRGB(75, 75, 75)
 	filterButton.BorderSizePixel = 0
 	filterButton.Font = Enum.Font.GothamBold
@@ -224,7 +229,7 @@ local function createFilterButton(text, minimumValue, ogOnly)
 	filterButton.Parent = filterBar
 
 	filterButton.Activated:Connect(function()
-		setFilter(minimumValue, ogOnly)
+		setFilter(filterType)
 		for _, button in ipairs(filterButtons) do
 			button.BackgroundColor3 = Color3.fromRGB(75, 75, 75)
 		end
@@ -235,11 +240,10 @@ local function createFilterButton(text, minimumValue, ogOnly)
 	return filterButton
 end
 
-local hundredMillionButton = createFilterButton("100M+", 100, false)
-createFilterButton("1B+", 1000, false)
-createFilterButton("OG", nil, true)
-hundredMillionButton.BackgroundColor3 = Color3.fromRGB(42, 180, 72)
-setFilter(100, false)
+local dragonsButton = createFilterButton("Dragons", "dragon")
+createFilterButton("OGs", "og")
+dragonsButton.BackgroundColor3 = Color3.fromRGB(42, 180, 72)
+setFilter("dragon")
 
 local dragging = false
 local dragStart
