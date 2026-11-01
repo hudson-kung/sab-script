@@ -23,10 +23,16 @@ box.Name = "BlackBox"
 box.AnchorPoint = Vector2.new(0.5, 0.5)
 box.Position = UDim2.fromScale(0.5, 0.5)
 box.Size = UDim2.fromOffset(620, 460)
-box.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+box.BackgroundColor3 = Color3.fromRGB(220, 100, 0)
 box.BorderSizePixel = 0
 box.Active = true
 box.Parent = screenGui
+
+local outline = Instance.new("UIStroke")
+outline.Name = "OrangeOutline"
+outline.Color = Color3.fromRGB(255, 170, 0)
+outline.Thickness = 3
+outline.Parent = box
 
 local titleBar = Instance.new("Frame")
 titleBar.Name = "TitleBar"
@@ -41,7 +47,7 @@ title.BackgroundTransparency = 1
 title.Position = UDim2.fromOffset(20, 0)
 title.Size = UDim2.new(1, -136, 1, 0)
 title.Font = Enum.Font.GothamBold
-title.Text = "Permeable Brainrot Sniper"
+title.Text = "Hollow Hub Brainrot Sniper"
 title.TextColor3 = Color3.fromRGB(255, 255, 255)
 title.TextSize = 24
 title.TextXAlignment = Enum.TextXAlignment.Left
