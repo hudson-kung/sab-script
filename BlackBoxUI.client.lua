@@ -73,6 +73,8 @@ closeButton.TextColor3 = Color3.fromRGB(255, 255, 255)
 closeButton.TextSize = 26
 closeButton.Parent = titleBar
 
+local filterBar
+
 local list = Instance.new("ScrollingFrame")
 list.Name = "ServerList"
 list.BackgroundTransparency = 1
@@ -104,7 +106,7 @@ layout.Padding = UDim.new(0, 10)
 layout.SortOrder = Enum.SortOrder.LayoutOrder
 layout.Parent = list
 
-local filterBar = Instance.new("Frame")
+filterBar = Instance.new("Frame")
 filterBar.Name = "FilterBar"
 filterBar.BackgroundTransparency = 1
 filterBar.Position = UDim2.fromOffset(20, 66)
