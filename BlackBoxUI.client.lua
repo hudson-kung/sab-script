@@ -90,6 +90,7 @@ local minimized = false
 minimizeButton.Activated:Connect(function()
 	minimized = not minimized
 	list.Visible = not minimized
+	filterBar.Visible = not minimized
 	box.Size = minimized and UDim2.fromOffset(expandedSize.X.Offset, 56) or expandedSize
 	minimizeButton.Text = minimized and "+" or "−"
 end)
