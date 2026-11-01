@@ -118,7 +118,7 @@ filterLayout.Parent = filterBar
 
 local brainrots = {
 	{ name = "Dragon Cannelloni", rate = "1.7B/s", value = 1700 },
-	{ name = "Elephant", rate = "1.5B/s", value = 1500 },
+	{ name = "Strawberry Elephant", rate = "1.5B/s", value = 1500 },
 	{ name = "Dragon Cannelloni", rate = "1.2B/s", value = 1200 },
 	{ name = "Dragon Cannelloni", rate = "800M/s", value = 800 },
 	{ name = "Strawberry Elephant", rate = "750M/s", value = 750 },
