@@ -26,7 +26,12 @@ box.Size = UDim2.fromOffset(620, 460)
 box.BackgroundColor3 = Color3.fromRGB(220, 100, 0)
 box.BorderSizePixel = 0
 box.Active = true
+box.ClipsDescendants = true
 box.Parent = screenGui
+
+local boxCorner = Instance.new("UICorner")
+boxCorner.CornerRadius = UDim.new(0, 12)
+boxCorner.Parent = box
 
 local outline = Instance.new("UIStroke")
 outline.Name = "OrangeOutline"
@@ -58,13 +63,17 @@ minimizeButton.Name = "MinimizeButton"
 minimizeButton.AnchorPoint = Vector2.new(1, 0.5)
 minimizeButton.Position = UDim2.new(1, -62, 0.5, 0)
 minimizeButton.Size = UDim2.fromOffset(38, 34)
-minimizeButton.BackgroundColor3 = Color3.fromRGB(110, 110, 110)
+minimizeButton.BackgroundColor3 = Color3.fromRGB(205, 105, 0)
 minimizeButton.BorderSizePixel = 0
 minimizeButton.Font = Enum.Font.GothamBold
 minimizeButton.Text = "−"
 minimizeButton.TextColor3 = Color3.fromRGB(255, 255, 255)
 minimizeButton.TextSize = 24
 minimizeButton.Parent = titleBar
+
+local minimizeCorner = Instance.new("UICorner")
+minimizeCorner.CornerRadius = UDim.new(0, 6)
+minimizeCorner.Parent = minimizeButton
 
 local closeButton = Instance.new("TextButton")
 closeButton.Name = "CloseButton"
@@ -78,6 +87,10 @@ closeButton.Text = "×"
 closeButton.TextColor3 = Color3.fromRGB(255, 255, 255)
 closeButton.TextSize = 26
 closeButton.Parent = titleBar
+
+local closeCorner = Instance.new("UICorner")
+closeCorner.CornerRadius = UDim.new(0, 6)
+closeCorner.Parent = closeButton
 
 local filterBar
 
@@ -143,10 +156,14 @@ for index, brainrot in ipairs(brainrots) do
 	local entry = Instance.new("Frame")
 	entry.Name = "Entry" .. index
 	entry.Size = UDim2.new(1, -8, 0, 64)
-	entry.BackgroundColor3 = Color3.fromRGB(75, 75, 75)
+	entry.BackgroundColor3 = Color3.fromRGB(195, 85, 0)
 	entry.BorderSizePixel = 0
 	entry.LayoutOrder = index
 	entry.Parent = list
+
+	local entryCorner = Instance.new("UICorner")
+	entryCorner.CornerRadius = UDim.new(0, 8)
+	entryCorner.Parent = entry
 
 	local entryName = Instance.new("TextLabel")
 	entryName.Name = "Name"
@@ -184,6 +201,10 @@ for index, brainrot in ipairs(brainrots) do
 	joinButton.TextColor3 = Color3.fromRGB(255, 255, 255)
 	joinButton.TextSize = 16
 	joinButton.Parent = entry
+
+	local joinCorner = Instance.new("UICorner")
+	joinCorner.CornerRadius = UDim.new(0, 6)
+	joinCorner.Parent = joinButton
 
 	joinButton.Activated:Connect(function()
 		print("Join selected for " .. brainrot.name)
@@ -229,7 +250,7 @@ local function createFilterButton(text, filterType)
 	local filterButton = Instance.new("TextButton")
 	filterButton.Name = text .. "Button"
 	filterButton.Size = UDim2.fromOffset(285, 36)
-	filterButton.BackgroundColor3 = Color3.fromRGB(75, 75, 75)
+	filterButton.BackgroundColor3 = Color3.fromRGB(195, 85, 0)
 	filterButton.BorderSizePixel = 0
 	filterButton.Font = Enum.Font.GothamBold
 	filterButton.Text = text
@@ -237,10 +258,14 @@ local function createFilterButton(text, filterType)
 	filterButton.TextSize = 15
 	filterButton.Parent = filterBar
 
+	local filterCorner = Instance.new("UICorner")
+	filterCorner.CornerRadius = UDim.new(0, 8)
+	filterCorner.Parent = filterButton
+
 	filterButton.Activated:Connect(function()
 		setFilter(filterType)
 		for _, button in ipairs(filterButtons) do
-			button.BackgroundColor3 = Color3.fromRGB(75, 75, 75)
+			button.BackgroundColor3 = Color3.fromRGB(195, 85, 0)
 		end
 		filterButton.BackgroundColor3 = Color3.fromRGB(42, 180, 72)
 	end)
