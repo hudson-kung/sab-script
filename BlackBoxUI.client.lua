@@ -54,13 +54,38 @@ local title = Instance.new("TextLabel")
 title.Name = "Title"
 title.BackgroundTransparency = 1
 title.Position = UDim2.fromOffset(20, 0)
-title.Size = UDim2.new(1, -136, 1, 0)
+title.Size = UDim2.new(1, -184, 1, 0)
 title.Font = Enum.Font.GothamBold
 title.Text = "Hollow Hub Brainrot Sniper 🎃"
 title.TextColor3 = Color3.fromRGB(255, 255, 255)
 title.TextSize = 24
 title.TextXAlignment = Enum.TextXAlignment.Left
 title.Parent = titleBar
+
+local refreshList
+
+local refreshButton = Instance.new("TextButton")
+refreshButton.Name = "RefreshButton"
+refreshButton.AnchorPoint = Vector2.new(1, 0.5)
+refreshButton.Position = UDim2.new(1, -108, 0.5, 0)
+refreshButton.Size = UDim2.fromOffset(38, 34)
+refreshButton.BackgroundColor3 = Color3.fromRGB(205, 105, 0)
+refreshButton.BorderSizePixel = 0
+refreshButton.Font = Enum.Font.GothamBold
+refreshButton.Text = "↻"
+refreshButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+refreshButton.TextSize = 24
+refreshButton.Parent = titleBar
+
+local refreshCorner = Instance.new("UICorner")
+refreshCorner.CornerRadius = UDim.new(0, 6)
+refreshCorner.Parent = refreshButton
+
+refreshButton.Activated:Connect(function()
+	if refreshList then
+		refreshList()
+	end
+end)
 
 local minimizeButton = Instance.new("TextButton")
 minimizeButton.Name = "MinimizeButton"
@@ -234,8 +259,10 @@ emptyMessage.Visible = false
 emptyMessage.Parent = list
 
 local filterButtons = {}
+local activeFilter = "dragon"
 
 local function setFilter(filterType)
+	activeFilter = filterType
 	local visibleCount = 0
 
 	for _, entryData in ipairs(entries) do
@@ -248,6 +275,10 @@ local function setFilter(filterType)
 
 	emptyMessage.Visible = visibleCount == 0
 	list.CanvasPosition = Vector2.new(0, 0)
+end
+
+refreshList = function()
+	setFilter(activeFilter)
 end
 
 local function createFilterButton(text, filterType)
