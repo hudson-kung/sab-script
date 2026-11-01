@@ -54,7 +54,7 @@ local title = Instance.new("TextLabel")
 title.Name = "Title"
 title.BackgroundTransparency = 1
 title.Position = UDim2.fromOffset(20, 0)
-title.Size = UDim2.new(1, -184, 1, 0)
+title.Size = UDim2.new(1, -230, 1, 0)
 title.Font = Enum.Font.GothamBold
 title.Text = "Hollow Hub Brainrot Sniper 🎃"
 title.TextColor3 = Color3.fromRGB(255, 255, 255)
@@ -68,13 +68,13 @@ local refreshButton = Instance.new("TextButton")
 refreshButton.Name = "RefreshButton"
 refreshButton.AnchorPoint = Vector2.new(1, 0.5)
 refreshButton.Position = UDim2.new(1, -108, 0.5, 0)
-refreshButton.Size = UDim2.fromOffset(38, 34)
+refreshButton.Size = UDim2.fromOffset(80, 34)
 refreshButton.BackgroundColor3 = Color3.fromRGB(205, 105, 0)
 refreshButton.BorderSizePixel = 0
 refreshButton.Font = Enum.Font.GothamBold
-refreshButton.Text = "↻"
+refreshButton.Text = "Refresh"
 refreshButton.TextColor3 = Color3.fromRGB(255, 255, 255)
-refreshButton.TextSize = 24
+refreshButton.TextSize = 13
 refreshButton.Parent = titleBar
 
 local refreshCorner = Instance.new("UICorner")
@@ -168,15 +168,15 @@ filterLayout.SortOrder = Enum.SortOrder.LayoutOrder
 filterLayout.Parent = filterBar
 
 local brainrots = {
-	{ name = "Dragon Cannelloni", rate = "1.7B/s", value = 1700, category = "dragon" },
-	{ name = "Strawberry Elephant", rate = "1.5B/s", value = 1500, og = true },
-	{ name = "Dragon Cannelloni", rate = "1.2B/s", value = 1200, category = "dragon" },
-	{ name = "Dragon Cannelloni", rate = "800M/s", value = 800, category = "dragon" },
-	{ name = "Strawberry Elephant", rate = "750M/s", value = 750, og = true },
-	{ name = "Headless Horseman", rate = "600M/s", value = 600, og = true },
-	{ name = "Dragon Cannelloni", rate = "500M/s", value = 500, category = "dragon" },
-	{ name = "Skibidi Toilet", rate = "450M/s", value = 450, og = true },
-	{ name = "Dragon Cannelloni", rate = "250M/s", value = 250, category = "dragon" },
+	{ name = "Dragon Cannelloni", rate = "1.7B/s", value = 1700, category = "dragon", code = "6F3G9P", region = "US West", ping = 42 },
+	{ name = "Strawberry Elephant", rate = "1.5B/s", value = 1500, og = true, code = "A9K2XM", region = "US East", ping = 58 },
+	{ name = "Dragon Cannelloni", rate = "1.2B/s", value = 1200, category = "dragon", code = "V4R8QJ", region = "Europe", ping = 91 },
+	{ name = "Dragon Cannelloni", rate = "800M/s", value = 800, category = "dragon", code = "H7D5NW", region = "US Central", ping = 34 },
+	{ name = "Strawberry Elephant", rate = "750M/s", value = 750, og = true, code = "P2L6TY", region = "Asia", ping = 116 },
+	{ name = "Headless Horseman", rate = "600M/s", value = 600, og = true, code = "B8C1ZF", region = "US West", ping = 47 },
+	{ name = "Dragon Cannelloni", rate = "500M/s", value = 500, category = "dragon", code = "M5X9KA", region = "Europe", ping = 83 },
+	{ name = "Skibidi Toilet", rate = "450M/s", value = 450, og = true, code = "Q3N7RV", region = "US East", ping = 63 },
+	{ name = "Dragon Cannelloni", rate = "250M/s", value = 250, category = "dragon", code = "T6W4HP", region = "US Central", ping = 39 },
 }
 
 local entries = {}
@@ -198,7 +198,7 @@ for index, brainrot in ipairs(brainrots) do
 	entryName.Name = "Name"
 	entryName.BackgroundTransparency = 1
 	entryName.Position = UDim2.fromOffset(14, 5)
-	entryName.Size = UDim2.new(1, -130, 0, 28)
+	entryName.Size = UDim2.fromOffset(190, 28)
 	entryName.Font = Enum.Font.GothamMedium
 	entryName.Text = brainrot.name
 	entryName.TextColor3 = Color3.fromRGB(255, 255, 255)
@@ -210,13 +210,37 @@ for index, brainrot in ipairs(brainrots) do
 	rate.Name = "MoneyRate"
 	rate.BackgroundTransparency = 1
 	rate.Position = UDim2.fromOffset(14, 31)
-	rate.Size = UDim2.new(1, -130, 0, 24)
+	rate.Size = UDim2.fromOffset(190, 24)
 	rate.Font = Enum.Font.Gotham
 	rate.Text = brainrot.rate
 	rate.TextColor3 = Color3.fromRGB(195, 195, 195)
 	rate.TextSize = 14
 	rate.TextXAlignment = Enum.TextXAlignment.Left
 	rate.Parent = entry
+
+	local serverCode = Instance.new("TextLabel")
+	serverCode.Name = "ServerCode"
+	serverCode.BackgroundTransparency = 1
+	serverCode.Position = UDim2.fromOffset(220, 5)
+	serverCode.Size = UDim2.fromOffset(230, 28)
+	serverCode.Font = Enum.Font.GothamMedium
+	serverCode.Text = "Server Code: " .. brainrot.code
+	serverCode.TextColor3 = Color3.fromRGB(255, 255, 255)
+	serverCode.TextSize = 14
+	serverCode.TextXAlignment = Enum.TextXAlignment.Left
+	serverCode.Parent = entry
+
+	local connection = Instance.new("TextLabel")
+	connection.Name = "Connection"
+	connection.BackgroundTransparency = 1
+	connection.Position = UDim2.fromOffset(220, 31)
+	connection.Size = UDim2.fromOffset(230, 24)
+	connection.Font = Enum.Font.Gotham
+	connection.Text = "Region: " .. brainrot.region .. "  •  Ping: " .. brainrot.ping .. "ms"
+	connection.TextColor3 = Color3.fromRGB(255, 230, 200)
+	connection.TextSize = 12
+	connection.TextXAlignment = Enum.TextXAlignment.Left
+	connection.Parent = entry
 
 	local joinButton = Instance.new("TextButton")
 	joinButton.Name = "JoinButton"
